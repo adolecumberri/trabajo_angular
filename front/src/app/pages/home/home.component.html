@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-12 mt-3">
+    <h2 class="text-center mb-4">Peliculas pendientes</h2>
+    <div class="row">
+      <ng-container *ngFor="let movie of movies">
+        <div *ngIf="movie.collection == 'pendiente'" class="col-4">
+          <div class="card" style="width: 18rem;">
+            <img [src]="movie.img" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{ movie.title }}</h5>
+              <p class="card-text">
+                <small>{{ movie.release_date }}</small>
+              </p>
+              <a
+                [routerLink]="['/movie-detail', movie.id]"
+                class="btn btn-primary"
+                >Go to detail</a
+              >
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="col-12 mt-3">
+    <h2 class="text-center mb-4">Peliculas favoritas</h2>
+    <div class="row">
+      <ng-container *ngFor="let movie of movies">
+        <div *ngIf="movie.collection == 'favorita'" class="col-4">
+          <div class="card" style="width: 18rem;">
+            <img [src]="movie.img" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{ movie.title }}</h5>
+              <p class="card-text">
+                <small>{{ movie.release_date }}</small>
+              </p>
+              <a
+                [routerLink]="['/movie-detail', movie.id]"
+                class="btn btn-primary"
+                >Go to detail</a
+              >
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
