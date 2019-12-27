@@ -20,17 +20,17 @@ controller.getUser = (req, res) => {
 //a traves del body
 controller.updateUser = (req, res) => {
   const { userId } = req.params;
-  const { username, password } = req.body;
+  const { email, name, surname, password } = req.body;
 
-  connection.query(`UPDATE users SET username = '${username}', password= sha1('${password}') 
-  WHERE user_id = '${userId}'`,
+  connection.query(`UPDATE users SET email = '${email}', name = '${name}',
+  surname= '${surname}', password= sha1('${password}') WHERE user_id = '${userId}'`,
     (err, results) => {
       if (err) console.log(err);
-      connection.query(`SELECT username, password FROM users WHERE user_id = '${userId}'`,
+      connection.query(`SELECT email, name, surname, password FROM users WHERE user_id = '${userId}'`,
         (err, results2) => {
-          if (err) res.send("ERROR");
-          const msg = `user '${username}' updated`
-          res.render('index.html', msg)
+          if (err) console.log(err)
+          const msg = `user ${name} ${surname} updated`
+          res.send(msg)
         }
       );
     }
@@ -38,20 +38,23 @@ controller.updateUser = (req, res) => {
 };
 //ruta para añadir un usuario nuevo
 controller.postUser = (req, res) => {
-  const { username, password } = req.body;
+  const { email, name, surname, password } = req.body;
 
-  connection.query(`INSERT INTO users (username, password) VALUES('${username}',sha1('${password}'))`,
+  connection.query(`INSERT INTO users (email, name, surname, password)
+   VALUES('${email}','${name}', '${surname}', sha1('${password}'))`,
     (err, results) => {
       if (err) {
         if (err.errno == 1062) {
           res.send("user already exists in the database");
         } else {
+          console.log(err)
           res.send("an unknown error ocurred");
         }
       } else {
-        connection.query(`SELECT username FROM users WHERE user_id='${results.insertId}'`,
+        connection.query(`SELECT email FROM users WHERE user_id='${results.insertId}'`,
           (err, results2) => {
-            res.send(`you have added the user: ${results2[0].username}`)
+            if (err) console.log(err)
+            res.send(`you have added the user: ${results2[0].email}`)
           }
         );
       }
