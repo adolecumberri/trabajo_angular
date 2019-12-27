@@ -1,25 +1,28 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-// Modules
-import { AppRoutingModule } from "./app-routing.module";
-
-// Components
-import { AppComponent } from "./app.component";
-import { HomeComponent } from "./pages/home/home.component";
-import { MovieDetailComponent } from "./pages/movie-detail/movie-detail.component";
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { HttpClientModule } from "@angular/common/http";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './pages/home/home.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AvatarModule } from 'ngx-avatar';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
     HomeComponent,
-    MovieDetailComponent,
-    NavbarComponent
+    CardComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    AvatarModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
