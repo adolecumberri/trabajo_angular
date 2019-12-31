@@ -8,10 +8,23 @@ const connection = mysql.createConnection({
 const controller = {};
 const msg = "ERROR";
 
+// controller.getMovies = (req, res) => {
+//   const { userId } = req.params;
+
+//   connection.query(`SELECT title,director, main_actor, release_date FROM movies 
+//   LEFT JOIN user_movie ON movies.movie_id = user_movie.movie_id 
+//   WHERE user_movie.user_id = '${userId}'`,
+//     (err, results) => {
+//       if (err) res.send(msg)
+//       res.send(results);
+//     }
+//   );
+// };
+
 controller.getMovies = (req, res) => {
   const { userId } = req.params;
 
-  connection.query(`SELECT title,director, main_actor, release_date FROM movies 
+  connection.query(`SELECT title, img, category, status FROM movies 
   LEFT JOIN user_movie ON movies.movie_id = user_movie.movie_id 
   WHERE user_movie.user_id = '${userId}'`,
     (err, results) => {

@@ -7,16 +7,21 @@ import { Movie } from "../models/movie.interface";
   providedIn: "root"
 })
 export class MovieService {
-  apiUrl = "http://localhost:3000/movies";
+  apiUrl = "http://localhost:3000";
   constructor(private httpClient: HttpClient) {
     console.log("Instancia nuestro movie service");
   }
 
-  getMovies(): Observable<Movie[]> {
-    return this.httpClient.get<Movie[]>(this.apiUrl);
+  // getMovies(): Observable<Movie> {
+  //        return this.httpClient.get<Movie>(`${this.apiUrl}/movies`);
+  //      }
+
+  getMovies(id:string): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>(`${this.apiUrl}/movies/${id}`);
   }
 
-  getMovie(id: string): Observable<Movie> {
-    return this.httpClient.get<Movie>(`${this.apiUrl}/${id}`);
+  saveMovie(movie:Movie): Observable<Movie[]> {
+    return this.httpClient.post<Movie[]>(`${this.apiUrl}/movies`,movie);
   }
+ 
 }
