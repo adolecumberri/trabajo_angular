@@ -11,8 +11,6 @@ import { AvatarModule } from 'ngx-avatar';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
-
-import { CardComponent } from './components/card/card.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UserMainComponent } from './pages/user/main/user_main.component';
 import { UserUpdateComponent } from './pages/user/update/user_update.component';
@@ -27,7 +25,6 @@ import { from } from 'rxjs';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    CardComponent,
     LoginComponent,
     UserUpdateComponent,
     UserMainComponent,

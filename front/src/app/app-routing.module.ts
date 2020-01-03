@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
 import { AddMoviesComponent } from './pages/add-movies/add-movies.component';
 
 /* Componentes  para enroutar*/
@@ -11,7 +10,6 @@ import { UserMainComponent } from './pages/user/main/user_main.component';
 
 /*
 Path por defecto en determinados lugares ?
- */ 
   {path: "**", pathMatch: "full", redirectTo: "home"}
  */
 
