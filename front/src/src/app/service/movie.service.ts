@@ -12,14 +12,11 @@ export class MovieService {
     console.log("Instancia nuestro movie service");
   }
 
-  // getMovies(): Observable<Movie> {
-  //        return this.httpClient.get<Movie>(`${this.apiUrl}/movies`);
-  //      }
-
-  getMovies(id:string): Observable<Movie[]> {
-    return this.httpClient.get<Movie[]>(`${this.apiUrl}/movies/${id}`);
+//  Ver todas las películas
+  getMovies(): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>(`${this.apiUrl}/movies`);
   }
-
+// Añadir películas
   saveMovie(movie:Movie): Observable<Movie[]> {
     return this.httpClient.post<Movie[]>(`${this.apiUrl}/movies`,movie);
   }
