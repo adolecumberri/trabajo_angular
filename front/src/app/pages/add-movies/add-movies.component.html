@@ -12,27 +12,31 @@
                   <input type="text" class="form-control" name="title" [(ngModel)] = "movie.title" aria-describedby="title" onfocus>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Image</label>
+                  <label for="image">Image</label>
                   <input type="url" class="form-control" name="img" [(ngModel)] = "movie.img">
+                </div>
+                <div class="form-group">
+                  <label for="release_date">Release Date</label>
+                  <input type="number" class="form-control" name="release_date" [(ngModel)] = "movie.release_date">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="category">Category</label>
-                      <select name="category" class="form-control" [(ngModel)] = "movie.category">
+                      <select id="category" name="category" class="form-control" [(ngModel)] = "movie.category">
                         <option selected>Choose...</option>
-                        <option>drama</option>
-                        <option>history</option>
-                        <option>fiction</option>
+                        <option [value]="1">drama</option>
+                        <option [value]="2">history</option>
+                        <option [value]="3">fiction</option>
                       </select>
                     </div>
                     <div class="form-group col-md-4">
                       <label for="status">Status</label>
-                      <select id="status" class="form-control" [(ngModel)] = "movie.status">
+                      <select id="status" name="status" class="form-control" [(ngModel)] = "movie.status">
                         <option selected>Choose...</option>
-                        <option>watched</option>
-                        <option>non_watched</option>
-                        <option>favourites</option>
-                        <option>unsettled</option>
+                        <option [value]="1">Watched</option>
+                        <option [value]="2">Non watched</option>
+                        <option [value]="3">Favourites</option>
+                        <option [value]="4">Unsettled</option>
                       </select>
                     </div>
                     </div>

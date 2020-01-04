@@ -10,23 +10,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  movie: Movie[];
-  constructor(
-    private router: ActivatedRoute,
-    private movieService: MovieService
-  ) {}
-  ngOnInit() {
-    this.router.params.subscribe(data => {
-      this.movieService
-        .getMovies(data.id)
-        .subscribe(movie => (this.movie = movie));
-      });
-    }
+  movies: Movie[];
+  constructor(private movieService: MovieService) {}
 
-  //   this.movieService.getMovies().subscribe(
-  //     res => this.movie = res;
-  //   ),
-  //   err => console.log(err)
-  // }
-  
+  ngOnInit() {
+    this.movieService.getMovies().subscribe(movies => (this.movies = movies));
+  }
 }
+
+  

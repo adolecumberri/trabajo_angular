@@ -11,13 +11,15 @@ import { AvatarModule } from 'ngx-avatar';
 import { AddMoviesComponent } from './pages/add-movies/add-movies.component';
 import { MovieService } from './service/movie.service'
 import { from } from 'rxjs';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    AddMoviesComponent
+    AddMoviesComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
