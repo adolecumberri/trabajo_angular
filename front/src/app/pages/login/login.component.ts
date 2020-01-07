@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   /* objeto tipo User que instancio vacio */
   private user : User = {
-    email: "",
+    email: null,
+    username: null,
     password: ""
   }
 
@@ -24,11 +25,9 @@ export class LoginComponent implements OnInit {
     return this.userService.addUsers(this.user).
     subscribe(
       data => {
-        console.log("los datos");
-        console.log(this.user);
         console.log(data);
 
-        this.userService.loginUser(this.user);
+        this.userService.loginUser(data);
         this.userService.setTokenInLocalStorage(data.user_id);
         
         this.router.navigate(['/main', this.user]);

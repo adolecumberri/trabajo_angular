@@ -20,20 +20,15 @@ controller.getUser = (req, res) => {
 //ruta para actualizar un usario pasandole el id por params y el nuevo username y password 
 //a traves del body
 controller.updateUser = (req, res) => {
-  const { userId } = req.params;
-  const { username, password } = req.body;
-
-  connection.query(`UPDATE users SET username = '${username}', password= sha1('${password}') 
-  WHERE user_id = '${userId}'`,
+  const { username, password, email, user_id } = req.body;
+console.log(req.body);
+  const sql = `UPDATE users SET username = '${username}', password= sha1('${password}'), email = '${email}' 
+  WHERE user_id = '${user_id}'`;
+  console.log(sql);
+  connection.query( sql,
     (err, results) => {
-      if (err) console.log(err);
-      connection.query(`SELECT username, password FROM users WHERE user_id = '${userId}'`,
-        (err, results2) => {
-          if (err) res.send("ERROR");
-          const msg = `user '${username}' updated`
-          res.render('index.html', msg)
-        }
-      );
+      if (err) throw err;
+      res.send("user updated");
     }
   );
 };

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Movie } from "../models/movie.interface";
 
@@ -11,6 +11,12 @@ export class MovieService {
   constructor(private httpClient: HttpClient) {
     console.log("Instancia nuestro movie service");
   }
+  
+  /* EL tipo de header */
+  headers: HttpHeaders = new HttpHeaders({
+    "Content-Type": "application/json"
+  });
+
 
   //  Ver todas las películas
   getMovies(): Observable<Movie[]> {
