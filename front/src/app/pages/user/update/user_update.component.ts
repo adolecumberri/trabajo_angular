@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+/* importacion de servicios */
+import { UserService } from '../../../service/user.service';
+
 @Component({
   selector: 'app-user-update',
   templateUrl: './user_update.component.html',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserUpdateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
   }

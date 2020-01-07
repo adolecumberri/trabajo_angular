@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AvatarModule } from 'ngx-avatar';
 
-
 /* Componentes para NgModule */
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -15,9 +14,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { UserMainComponent } from './pages/user/main/user_main.component';
 import { UserUpdateComponent } from './pages/user/update/user_update.component';
 import { AddMoviesComponent } from './pages/add-movies/add-movies.component';
+
+/* servicios */
 import { MovieService } from './service/movie.service';
+import { UserService } from './service/user.service';
 
 import { from } from 'rxjs';
+import { CardComponent } from './components/card/card.component';
 
 
 @NgModule({
@@ -28,7 +31,8 @@ import { from } from 'rxjs';
     LoginComponent,
     UserUpdateComponent,
     UserMainComponent,
-    AddMoviesComponent
+    AddMoviesComponent,
+    CardComponent
 
   ],
   imports: [
@@ -39,7 +43,8 @@ import { from } from 'rxjs';
     FormsModule
   ],
   providers: [
-    MovieService
+    MovieService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

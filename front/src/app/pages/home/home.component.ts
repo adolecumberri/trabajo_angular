@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe(data => {
       this.movieService
-        .getMovies(data.id)
+        .getMovies()
         .subscribe(movie => (this.movie = movie));
       });
     }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/service/user.service';
+import { User } from '../../models/user.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +9,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  /* Construnctor que instancia el servicio de conexion a la base de datos. */
+  constructor(private userService: UserService, private router: Router) {}
 
-  constructor() { }
+  /* objeto tipo User que instancio vacio */
+  private user : User = {
+    email: "",
+    password: ""
+  }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onLogin(){
+    return this.userService.addUsers(this.user).
+    subscribe(
+      data => {
+        console.log("los datos");
+        console.log(this.user);
+        console.log(data);
+
+        this.userService.loginUser(this.user);
+        this.userService.setTokenInLocalStorage(data.user_id);
+        
+        this.router.navigate(['/main', this.user]);
+
+    },
+    error => {
+      console.log("el errror");
+      console.log(error)
+    }
+    );
   }
 
 }

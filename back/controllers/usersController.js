@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const connection = mysql.createConnection({
+  port: 8080,
   host: "localhost",
   user: "root",
   password: "root",
@@ -38,20 +39,26 @@ controller.updateUser = (req, res) => {
 };
 //ruta para añadir un usuario nuevo
 controller.postUser = (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
+  console.log(req.body);
+  console.log(email.includes('@'));
+  let sql = `INSERT INTO users SET ${email.includes('@') ? 'email' : 'username'} = '${email}', password= sha1('${password}');`;
 
-  connection.query(`INSERT INTO users (username, password) VALUES('${username}',sha1('${password}'))`,
+  connection.query(sql,
     (err, results) => {
       if (err) {
         if (err.errno == 1062) {
           res.send("user already exists in the database");
         } else {
-          res.send("an unknown error ocurred");
+          res.send(err);
         }
       } else {
-        connection.query(`SELECT username FROM users WHERE user_id='${results.insertId}'`,
+        connection.query(`SELECT * FROM users WHERE user_id = '${results.insertId}'`,
           (err, results2) => {
-            res.send(`you have added the user: ${results2[0].username}`)
+            if(err) throw err;
+            console.log("por akí sin errores ");
+            console.log(results2);
+            res.send(results2[0]);
           }
         );
       }
