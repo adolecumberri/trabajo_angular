@@ -22,12 +22,12 @@ import { UserService } from './service/user.service';
 import { from } from 'rxjs';
 import { CardComponent } from './components/card/card.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
+
     LoginComponent,
     UserUpdateComponent,
     UserMainComponent,
