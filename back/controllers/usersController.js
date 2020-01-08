@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const connection = mysql.createConnection({
+  port: 8080,
   host: "localhost",
   user: "root",
   password: "root",
@@ -19,39 +20,40 @@ controller.getUser = (req, res) => {
 //ruta para actualizar un usario pasandole el id por params y el nuevo username y password 
 //a traves del body
 controller.updateUser = (req, res) => {
-  const { userId } = req.params;
-  const { username, password } = req.body;
-
-  connection.query(`UPDATE users SET username = '${username}', password= sha1('${password}') 
-  WHERE user_id = '${userId}'`,
+  const { username, password, email, user_id } = req.body;
+console.log(req.body);
+  const sql = `UPDATE users SET username = '${username}', password= sha1('${password}'), email = '${email}' 
+  WHERE user_id = '${user_id}'`;
+  console.log(sql);
+  connection.query( sql,
     (err, results) => {
-      if (err) console.log(err);
-      connection.query(`SELECT username, password FROM users WHERE user_id = '${userId}'`,
-        (err, results2) => {
-          if (err) res.send("ERROR");
-          const msg = `user '${username}' updated`
-          res.render('index.html', msg)
-        }
-      );
+      if (err) throw err;
+      res.send("user updated");
     }
   );
 };
 //ruta para añadir un usuario nuevo
 controller.postUser = (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
+  console.log(req.body);
+  console.log(email.includes('@'));
+  let sql = `INSERT INTO users SET ${email.includes('@') ? 'email' : 'username'} = '${email}', password= sha1('${password}');`;
 
-  connection.query(`INSERT INTO users (username, password) VALUES('${username}',sha1('${password}'))`,
+  connection.query(sql,
     (err, results) => {
       if (err) {
         if (err.errno == 1062) {
           res.send("user already exists in the database");
         } else {
-          res.send("an unknown error ocurred");
+          res.send(err);
         }
       } else {
-        connection.query(`SELECT username FROM users WHERE user_id='${results.insertId}'`,
+        connection.query(`SELECT * FROM users WHERE user_id = '${results.insertId}'`,
           (err, results2) => {
-            res.send(`you have added the user: ${results2[0].username}`)
+            if(err) throw err;
+            console.log("por akí sin errores ");
+            console.log(results2);
+            res.send(results2[0]);
           }
         );
       }

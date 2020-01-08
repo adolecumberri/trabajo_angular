@@ -1,0 +1,15 @@
+<div class="container">
+  <!-- Quitar la etiqueta form y activar una funcion con un fetch que conecte con el back-->
+    <form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)">
+        <div class="form-group">
+            <label for="email">Name or Email address</label>
+            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Username or Email" name="email" [(ngModel)]="user.email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password" [(ngModel)]="user.password" required>
+        </div>
+        <small id="emailHelp" class="form-text text-muted mb-3">insert numbers and letters.</small>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+    </form>
+</div>

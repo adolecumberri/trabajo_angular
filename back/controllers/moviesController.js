@@ -8,18 +8,32 @@ const connection = mysql.createConnection({
 const controller = {};
 const msg = "ERROR";
 
-// controller.getMovies = (req, res) => {
-//   const { userId } = req.params;
 
-//   connection.query(`SELECT title,director, main_actor, release_date FROM movies 
-//   LEFT JOIN user_movie ON movies.movie_id = user_movie.movie_id 
-//   WHERE user_movie.user_id = '${userId}'`,
-//     (err, results) => {
-//       if (err) res.send(msg)
-//       res.send(results);
-//     }
-//   );
-// };
+// Mostrar todas las películas 
+
+controller.getMoviesHome = (req, res) => {
+  
+
+  connection.query(`SELECT title, img, category, status, release_date FROM movies`,
+      (err, results) => {
+        if (err) res.send(msg)
+        res.send(results);
+      }
+    );
+  };
+
+// Añadir películas al sistema
+
+  controller.addMovies = (req, res) => {
+    const { title, img, category, status, release_date } = req.body;
+   connection.query(`INSERT INTO movies (title, img, category, status, release_date) 
+        VALUES('${title}', '${img}', '${category}','${status}', '${release_date}')`,
+          (err, results2) => {
+            if (err) console.log(err)
+            res.send(`movie ${title} added to your collection`)
+          }
+        );
+    }
 
 controller.getMovies = (req, res) => {
   const { userId } = req.params;

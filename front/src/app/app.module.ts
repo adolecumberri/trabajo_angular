@@ -3,13 +3,22 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { AvatarModule } from 'ngx-avatar';
+
+/* Componentes para NgModule */
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
-import { HttpClientModule } from '@angular/common/http';
-import { AvatarModule } from 'ngx-avatar';
+import { LoginComponent } from './pages/login/login.component';
+import { UserMainComponent } from './pages/user/main/user_main.component';
+import { UserUpdateComponent } from './pages/user/update/user_update.component';
 import { AddMoviesComponent } from './pages/add-movies/add-movies.component';
-import { MovieService } from './service/movie.service'
+
+/* servicios */
+import { MovieService } from './service/movie.service';
+import { UserService } from './service/user.service';
+
 import { from } from 'rxjs';
 import { CardComponent } from './components/card/card.component';
 
@@ -18,8 +27,13 @@ import { CardComponent } from './components/card/card.component';
     AppComponent,
     NavbarComponent,
     HomeComponent,
+
+    LoginComponent,
+    UserUpdateComponent,
+    UserMainComponent,
     AddMoviesComponent,
     CardComponent
+
   ],
   imports: [
     BrowserModule,
@@ -29,7 +43,8 @@ import { CardComponent } from './components/card/card.component';
     FormsModule
   ],
   providers: [
-    MovieService
+    MovieService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
