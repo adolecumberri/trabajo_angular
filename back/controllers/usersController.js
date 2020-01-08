@@ -1,6 +1,5 @@
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-  port: 8080,
   host: "localhost",
   user: "root",
   password: "root",
@@ -28,7 +27,7 @@ console.log(req.body);
   connection.query( sql,
     (err, results) => {
       if (err) throw err;
-      res.send("user updated");
+      res.send(results);
     }
   );
 };

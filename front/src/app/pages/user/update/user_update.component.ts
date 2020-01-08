@@ -26,8 +26,6 @@ export class UserUpdateComponent implements OnInit {
 
     if(value.password !== value.password_verification){
 /*poner booleano a true y que pase algo */
-console.log(value.password);
-console.log(value.password_verification);
       this.errorPassword = true;
     }else{
       console.log("value");
@@ -37,9 +35,15 @@ console.log(value.password_verification);
       return this.userService.updateUser(this.user, userId)
       .subscribe(
         data => {
-          console.log("los datos");
           console.log(this.user);
-          console.log(data);
+          const newUser : User = {
+            user_id: this.user.user_id,
+            email: this.user.email,
+            username: this.user.username,
+            password: this.user.password
+          }
+          this.userService.loginUser(newUser);
+          this.userService.setTokenInLocalStorage(newUser.user_id);
           
         },
         error => {

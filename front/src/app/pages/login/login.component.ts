@@ -29,14 +29,11 @@ export class LoginComponent implements OnInit {
 
         this.userService.loginUser(data);
         this.userService.setTokenInLocalStorage(data.user_id);
-        
         this.router.navigate(['/main', this.user]);
 
     },
-    error => {
-      console.log("el errror");
+    error => 
       console.log(error)
-    }
     );
   }
 
